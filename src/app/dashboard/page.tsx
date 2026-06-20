@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../lib/supabase';
-import { triggerPipelineSync } from '../lib/api';
+import { supabase } from '@/lib/supabase';
+import { triggerPipelineSync } from '@/lib/api';
 import {
   Database,
   Users,
@@ -239,7 +239,7 @@ export default function OverviewPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
           <button
-            onClick={() => handleTogglePipeline('trending')}
+            onClick={() => handleTriggerPipeline('trending')}
             disabled={!!triggering}
             className="px-4 py-3 border border-slate-800 hover:border-blue-500/30 hover:bg-blue-500/5 text-slate-300 hover:text-blue-400 text-xs font-bold font-mono tracking-wider rounded-lg transition-all disabled:opacity-50"
           >
@@ -247,7 +247,7 @@ export default function OverviewPage() {
           </button>
           
           <button
-            onClick={() => handleTogglePipeline('news')}
+            onClick={() => handleTriggerPipeline('news')}
             disabled={!!triggering}
             className="px-4 py-3 border border-slate-800 hover:border-blue-500/30 hover:bg-blue-500/5 text-slate-300 hover:text-blue-400 text-xs font-bold font-mono tracking-wider rounded-lg transition-all disabled:opacity-50"
           >
@@ -255,7 +255,7 @@ export default function OverviewPage() {
           </button>
           
           <button
-            onClick={() => handleTogglePipeline('tweets')}
+            onClick={() => handleTriggerPipeline('tweets')}
             disabled={!!triggering}
             className="px-4 py-3 border border-slate-800 hover:border-blue-500/30 hover:bg-blue-500/5 text-slate-300 hover:text-blue-400 text-xs font-bold font-mono tracking-wider rounded-lg transition-all disabled:opacity-50"
           >
@@ -263,7 +263,7 @@ export default function OverviewPage() {
           </button>
           
           <button
-            onClick={() => handleTogglePipeline('releases')}
+            onClick={() => handleTriggerPipeline('releases')}
             disabled={!!triggering}
             className="px-4 py-3 border border-slate-800 hover:border-blue-500/30 hover:bg-blue-500/5 text-slate-300 hover:text-blue-400 text-xs font-bold font-mono tracking-wider rounded-lg transition-all disabled:opacity-50"
           >
@@ -271,7 +271,7 @@ export default function OverviewPage() {
           </button>
 
           <button
-            onClick={() => handleTogglePipeline('keepalive')}
+            onClick={() => handleTriggerPipeline('keepalive')}
             disabled={!!triggering}
             className="px-4 py-3 border border-slate-800 hover:border-purple-500/30 hover:bg-purple-500/5 text-slate-300 hover:text-purple-400 text-xs font-bold font-mono tracking-wider rounded-lg transition-all disabled:opacity-50"
           >

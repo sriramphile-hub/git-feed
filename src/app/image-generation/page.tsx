@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { supabase } from '../../../lib/supabase';
+import { supabase } from '@/lib/supabase';
 import { Image, ToggleLeft, ToggleRight, Sparkle, HardDrives, ArrowClockwise } from '@phosphor-icons/react';
 
 interface RepoThumbnail {

@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '../lib/supabase';
-import { Terminal, Key, ShieldAlert } from '@phosphor-icons/react';
+import { supabase } from '@/lib/supabase';
+import { Terminal, Key, ShieldWarning } from '@phosphor-icons/react';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -84,7 +84,7 @@ export default function LoginPage() {
 
         {error && (
           <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg flex items-start gap-3">
-            <ShieldAlert size={20} className="text-red-500 flex-shrink-0 mt-0.5" />
+            <ShieldWarning size={20} className="text-red-500 flex-shrink-0 mt-0.5" />
             <p className="text-xs text-red-200 leading-relaxed font-mono">{error}</p>
           </div>
         )}
