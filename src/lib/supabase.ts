@@ -5,11 +5,13 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
 // Client for normal browser / authenticated user queries
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = supabaseUrl && supabaseAnonKey
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null as any;
 
 // Client for administrative backend operations (bypassing RLS with service_role)
 // Only initialized on server-side contexts
-export const supabaseAdmin = typeof window === 'undefined' && supabaseServiceRoleKey
+export const supabaseAdmin = typeof window === 'undefined' && supabaseUrl && supabaseServiceRoleKey
   ? createClient(supabaseUrl, supabaseServiceRoleKey, {
       auth: {
         autoRefreshToken: false,
