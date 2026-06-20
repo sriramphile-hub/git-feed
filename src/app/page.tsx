@@ -16,15 +16,24 @@ export default function LoginPage() {
   useEffect(() => {
     // Check if user is already logged in as admin
     const checkUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user) {
-        const isAdmin = session.user.app_metadata?.role === 'admin' || session.user.email?.endsWith('@gitfeed.app');
-        if (isAdmin) {
-          router.replace('/dashboard');
-          return;
+      try {
+        if (!supabase) {
+          throw new Error('Supabase configuration missing. Please add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to your Vercel Environment Variables.');
         }
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session?.user) {
+          const isAdmin = session.user.app_metadata?.role === 'admin' || session.user.email?.endsWith('@gitfeed.app');
+          if (isAdmin) {
+            router.replace('/dashboard');
+            return;
+          }
+        }
+      } catch (err: any) {
+        console.error('Session check error:', err);
+        setError(err.message || 'Supabase initialization failed.');
+      } finally {
+        setCheckingSession(false);
       }
-      setCheckingSession(false);
     };
 
     checkUser();
@@ -36,6 +45,9 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
+      if (!supabase) {
+        throw new Error('Supabase configuration missing.');
+      }
       const { data, error: authError } = await supabase.auth.signInWithPassword({
         email,
         password,
